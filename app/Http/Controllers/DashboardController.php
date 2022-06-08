@@ -19,4 +19,10 @@ class DashboardController extends Controller
         // dd($productcategory);
         return view('dashboard', compact('productCount', 'userCount', 'purchaseCount'));
     }
+
+    // public function test()
+    // {
+
+    //     return view("layouts");
+    // }
 }
