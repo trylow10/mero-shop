@@ -128,7 +128,7 @@
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <a href="route('logout')" onclick="event.preventDefault();
-                                                                this.closest('form').submit();">
+                                                                                        this.closest('form').submit();">
                                     Log Out
                                 </a>
                             </form>
@@ -138,6 +138,8 @@
             </div>
         </nav>
         <!-- NAVBAR ENDS -->
+
+
 
         <!-- Subscribe -->
         @yield('content')
@@ -155,9 +157,10 @@
                                 @csrf
                                 <input type="text" id="email" name="email"
                                     class="w-full m-1 p-2  text-sm focus:outline-none" placeholder="Enter your email">
-                                @error('email')
+
+                                {{-- @error('email')
                                     <p class="text-red-500 text-ms mt-2">{{ $message }}</p>
-                                @enderror
+                                @enderror --}}
 
                                 <button class="btn btn-primary">Subscribe
                                 </button>

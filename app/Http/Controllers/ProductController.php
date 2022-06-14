@@ -24,6 +24,34 @@ class ProductController extends Controller
     {
     }
 
+    public function imgshow($id)
+    {
+        // $sql = Product::all()->where('id', 1);
+        // dd($sql);
+        $product = Product::find($id);
+        // $products = Product::find();
+        // dd($id);
+
+        // foreach ($products as $product) {
+        //     dd($products);
+
+        // dd($image);
+        $images = json_decode($product->image, true);
+
+        // dd($images);
+        // dd($test);
+
+        // foreach ($test as $images) {
+
+
+        //     // return view("images");
+        return view('images', ['images' => $images], ['product' => $product]);
+    }
+
+    // public function getDicountedPriceAttribute()
+    // {
+    //     return $this->price * (1 - $this->discount / 100);
+    // }
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +59,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-
+        // dd('here');
         // $product = new Product();
         // dd($product);
 
@@ -48,13 +76,39 @@ class ProductController extends Controller
         $product->description = $request->input('description');
         // $product->title = $request->input('title');
         // $product->otherinfo = $request->input('otherinfo');
-        if ($request->hasfile('image')) {
-            $file = $request->file('image');
-            $filetype = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $filetype;
-            $file->move('Uploads/products/', $filename);
-            $product->image = $filename;
+        // if ($request->hasfile('image')) {
+        //     $file = $request->file('image');
+        //     $filetype = $file->getClientOriginalExtension();
+        //     $filename = time() . '.' . $filetype;
+        //     $file->move('Uploads/products/', $filename);
+        //     $product->image = $filename;
+        // }
+
+        $request->validate([
+            'images' => 'required',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $images = [];
+
+        if ($image = $request->file('images')) {
+            foreach ($request->images as $key => $image) {
+                // dd($image);
+
+                // dd($image->getClientOriginalExtension());
+                $imageType = $image->getClientOriginalExtension();
+                $imageName = time() . rand(1, 99) . '.' . $imageType;
+                $image->move('Uploads/products/', $imageName);
+
+                $images['image' . $key] = $imageName;
+            }
+            // $data = $request->only('images');
+            $product->image = json_encode($images);
+            // Product::insert($images);
+            // dd($images);
         }
+
+
         // $product->productprice = $request->input('productprice');
         // $product->category;
 
@@ -71,7 +125,10 @@ class ProductController extends Controller
 
         // dd($product);
 
-        return redirect('products')->with('success', 'Product has been Added.');
+
+
+
+        return redirect()->route('products')->with('success', 'Product has been Added.');
     }
 
     /**
@@ -151,7 +208,9 @@ class ProductController extends Controller
 
     public function showProduct(Request $request)
     {
+        // dd("lochn");
         $search = $request->input('search');
+        // dd($search);
         // search filter
         if (request('search')) {
             $products = Product::latest()->where('name', 'like', '%' . request('search') . '%')

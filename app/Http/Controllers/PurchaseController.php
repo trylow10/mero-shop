@@ -82,15 +82,18 @@ class PurchaseController extends Controller
         $products = Product::latest()->paginate(15);
 
         // dd($products->category);
-        session()->forget('cart');
-        session()->flash("Cart has been cleared");
+        // session()->forget('cart');
+        // session()->flash("Cart has been cleared");
 
         // $products = Product::latest()->paginate(15);
 
         // dd($products->category);
-
-        // return view('products', ['products' => $products]);
-        return redirect()->route('homepage', with(['products' => $products]));
+        // dd('here');
+        // return view('products', ['products' => $products]);\
+        // return redirect()->intended('homepage', with(['products' => $products]));
+        // return redirect()->route('homepage', with(['products' => $products]));
+        return redirect()->route('homepage', [$products]);
+        // return redirect('homepage', compact('products'));
     }
 
 
@@ -104,14 +107,14 @@ class PurchaseController extends Controller
     {
         // $products = Product::filter(request(['category']))->paginate(15);
         $products = Product::latest()->paginate(15);
+        // dd($products[0]);
         $users = Purchase::latest()->paginate(15);
+        $purchases = Purchase::all();
+        // foreach ($products as $product) { {
 
-        foreach ($products as $product) { {
-
-                $purchases = Purchase::all();
-            }
-            return view('purchase', ['purchases' => $purchases], ['products' => $products], ['users' => $users]);
-        }
+        //     }
+        // }
+        return view('purchase', ['purchases' => $purchases], ['products' => $products], ['users' => $users]);
     }
 }
     // return view('homepage');

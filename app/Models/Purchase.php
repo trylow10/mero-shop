@@ -16,7 +16,8 @@ class Purchase extends Model
         'phone',
         'country',
         'post_code',
-        'city'
+        'city',
+        'user_id'
 
 
     ];
@@ -28,7 +29,7 @@ class Purchase extends Model
     }
     public function user()
     {
-        return $this->hasMany(Purchase::class, 'purchase_products');
+        return $this->belongsTo(User::class, 'user_id');
 
         // return $this->hasMany(Auth::class, 'purchase_products');
     }

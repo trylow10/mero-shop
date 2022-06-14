@@ -18,6 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const HOME = '/';
+    protected $namespace = 'App\Http\Controllers';
 
     /**
      * The controller namespace for the application.
@@ -35,9 +36,16 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // parent::boot();
         $this->configureRateLimiting();
 
         $this->routes(function () {
+
+            Route::middleware('web')
+                ->prefix('product')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/product.php'));
+
             Route::prefix('api')
                 ->middleware('api')
                 ->namespace($this->namespace)
@@ -47,6 +55,45 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
+    }
+    public function map()
+    {
+
+
+        // $this->mapApiRoutes();
+        // $this->mapAuthRoutes();
+        // $this->mapWebRoutes();
+        // $this->mapProductRoutes();
+    }
+    protected function mapAuthRoutes()
+    {
+        Route::middleware('auth')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/auth.php'));
+    }
+    protected function mapWebRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
+    }
+
+
+
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapApiRoutes()
+    {
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/api.php'));
     }
 
     /**
@@ -59,5 +106,18 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
+    }
+    /**
+     * Define the "student" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapProductRoutes()
+    {
+        Route::prefix('product')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/product.php'));
     }
 }

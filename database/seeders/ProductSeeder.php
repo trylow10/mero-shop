@@ -24,25 +24,29 @@ class ProductSeeder extends Seeder
                 'name' => 'Samsung Galaxy',
                 'description' => 'Samsung Brand',
                 'image' => 'https://dummyimage.com/200x300/000/fff&text=Samsung',
-                'price' => 100
+                'price' => 100,
+                'discount' => 10
             ],
             [
                 'name' => 'Apple iPhone 12',
                 'description' => 'Apple Brand',
                 'image' => 'https://dummyimage.com/200x300/000/fff&text=Iphone',
-                'price' => 500
+                'price' => 500,
+                'discount' => 20
             ],
             [
                 'name' => 'Google Pixel 2 XL',
                 'description' => 'Google Pixel Brand',
                 'image' => 'https://dummyimage.com/200x300/000/fff&text=Google',
-                'price' => 400
+                'price' => 400,
+                'discount' => 10
             ],
             [
                 'name' => 'LG V10 H800',
                 'description' => 'LG Brand',
                 'image' => 'https://dummyimage.com/200x300/000/fff&text=LG',
-                'price' => 200
+                'price' => 200,
+                'discount' => 10
             ]
         ];
 
@@ -51,7 +55,3 @@ class ProductSeeder extends Seeder
         }
     }
 }
-
-
-
-

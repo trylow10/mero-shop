@@ -31,7 +31,13 @@ return [
     ],
 
     'mailchimp' => [
-        'key'=> env('MAILCHIMP_KEY'),
-        'lists' =>['subscribers'=> env('MAILCHIMP_LIST_SUBSCRIBERS')],
+        'key' => env('MAILCHIMP_KEY'),
+        'lists' => ['subscribers' => env('MAILCHIMP_LIST_SUBSCRIBERS')],
+    ],
+
+    'google' => [
+        'client_id' => '765931766415-3lqnfu4vg19u5o8kcf5u0li5166pjgmp.apps.googleusercontent.com',
+        'client_secret' => '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',
+        'redirect' => 'http://localhost:8000/auth/google/callback',
     ]
-    ];
+];

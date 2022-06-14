@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CartController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,54 +18,57 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'admin'])->name('dashboard');
-
-//route for products view
-Route::get('/products', function () {
-    return view('products');
-})->middleware(['auth', 'admin'])->name('products');
-
-// route for add product view
-Route::get('/addProduct', function () {
-    return view('addProduct');
-})->middleware(['auth', 'admin'])->name('addProducts');
-
-// create a new product
-Route::get('product', [ProductController::class, 'create'])->middleware(['auth', 'admin'])->name('create');
-Route::post('product', [ProductController::class, 'store'])->middleware(['auth', 'admin'])->name('store');
-
-// show products for admin for crud
-Route::get('/products', [ProductController::class, 'show'])->middleware(['auth', 'admin'])->name('products');
-
-// edit product view route
-Route::get('product/edit/{id}', [ProductController::class, 'edit'])->middleware(['auth', 'admin'])->name('productedit');
-
-// edit product POST or submit data route
-Route::post('editproduct/{id}', [ProductController::class, 'update'])->middleware(['auth', 'admin'])->name('productedit');
-
-// del product
-Route::delete('/products/{products}', [ProductController::class, 'destroy'])->middleware(['auth', 'admin'])->name('productdelete');
-
-// show all products to homepage for user
 Route::get('/', [ProductController::class, 'showProduct'])->name('homepage');
 
 
-//buy now and add to cart for user
 
-// Route::get('/', [ProductController::class, 'buynow'])->name('purchase');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'admin'])->name('dashboard');
 
-// mailchimp
-Route::post('newsletter', [ProductController::class, 'newsLetter']);
+//route for products view
+// Route::get('/products', function () {
+//     return view('products');
+// })->middleware(['auth', 'admin'])->name('products');
+
+// route for add product view
+// Route::get('/addProduct', function () {
+//     return view('addProduct');
+// })->middleware(['auth', 'admin'])->name('addProducts');
+
+// create a new product
+// Route::get('product', [ProductController::class, 'create'])->middleware(['auth', 'admin'])->name('create');
+// Route::post('product', [ProductController::class, 'store'])->middleware(['auth', 'admin'])->name('store');
+
+// // show products for admin for crud
+// Route::get('/products', [ProductController::class, 'show'])->middleware(['auth', 'admin'])->name('products');
+
+// // edit product view route
+// Route::get('product/edit/{id}', [ProductController::class, 'edit'])->middleware(['auth', 'admin'])->name('productedit');
+
+// // edit product POST or submit data route
+// Route::post('editproduct/{id}', [ProductController::class, 'update'])->middleware(['auth', 'admin'])->name('productedit');
+
+// // del product
+// Route::delete('/products/{products}', [ProductController::class, 'destroy'])->middleware(['auth', 'admin'])->name('productdelete');
+
+// // show all products to homepage for user
+// Route::get('/', [ProductController::class, 'showProduct'])->name('homepage');
+
+
+// //buy now and add to cart for user
+
+// // Route::get('/', [ProductController::class, 'buynow'])->name('purchase');
+
+// // mailchimp
+// Route::post('newsletter', [ProductController::class, 'newsLetter']);
 
 // dashboard Controller showing number of products
 
-Route::get('/dashboard', [DashboardController::class, 'count'])->middleware(['auth', 'admin'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'count'])->middleware(['admin', 'auth'])->name('dashboard');
 
 
 // Route::get('/cart', [PurchaseController::class, 'index']);

@@ -41,31 +41,31 @@ class CartController extends Controller
     public function addToCart($id)
     {
         // $category = Category::find($id);
-        if (Auth::check()) {
-            return redirect()->route('login', with('sucess', "please login first"));
+        // if (Auth::check()) {
+        //     return redirect()->route('login');
+        // } else {
+
+        $product = Product::find($id);
+        // dd($product);
+
+
+
+        $cart = session()->get('cart', []);
+        // dd($cart);
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
         } else {
-
-            $product = Product::find($id);
-            // dd($product);
-
-
-
-            $cart = session()->get('cart', []);
-            // dd($cart);
-            if (isset($cart[$id])) {
-                $cart[$id]['quantity']++;
-            } else {
-                $cart[$id] = [
-                    'product_id' => $product->id,
-                    'user_id' => auth()->user()->id,
-                    "name" => $product->name,
-                    "quantity" => 1,
-                    "price" => $product->price,
-                    "image" => $product->image,
-                    "description" => $product->description
-                ];
-            }
+            $cart[$id] = [
+                'product_id' => $product->id,
+                'user_id' => auth()->user()->id,
+                "name" => $product->name,
+                "quantity" => 1,
+                "price" => $product->price,
+                "image" => $product->image,
+                "description" => $product->description
+            ];
         }
+        // }
         // dd($cart[$id]);
         // $purchase = crea
 

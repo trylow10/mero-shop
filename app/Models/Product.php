@@ -10,17 +10,48 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $fillable = [
+        'image'
+    ];
 
-    public function scopeFilter($query, array $filters)
+    public function getDicountedPriceAttribute()
     {
-        $query->when(
-            $filters['category'] ?? false,
-            fn ($query, $category) =>
-            $query
-                ->whereHas('category', fn ($query) =>
-                $query->where('name', $category))
-        );
+        return $this->price * (1 - $this->discount / 100);
     }
+
+
+    // public function scopeFilter($query, array $filters)
+    // {
+    //     $query->when(
+    //         $filters['category'] ?? false,
+    //         fn ($query, $category) =>
+    //         $query
+    //             ->whereHas('category', fn ($query) =>
+    //             $query->where('name', $category))
+    //     );
+    // }
+
+
+    // public function scopeRelatedProducts($query, $count = 10, $inRandomOrder = true)
+    // {
+    //     dd($this->category_id);
+
+    //     $sql = Product::all()->where('id', 1);
+    //     dd($sql);
+
+    //     $query = $query->where('category_id', $this->category_id);
+
+    //     // dd($query);
+    //     // ->where('slug' '!=' $this->slug);
+
+    //     if ($inRandomOrder) {
+    //         $query->inRandomOrder();
+    //     }
+
+    //     return $query->take($count);
+    // }
+
+
 
     public function category()
     {

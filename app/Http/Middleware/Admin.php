@@ -17,7 +17,9 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user() ?->name != 'Trilochan Aryal'){
+        // dd("here0");
+        // dd(auth()->user());
+        if (auth()->user()->name != 'Trilochan Aryal') {
             abort(HttpFoundationResponse::HTTP_FORBIDDEN);
         }
 
