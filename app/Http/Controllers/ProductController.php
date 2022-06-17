@@ -9,6 +9,8 @@ use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
+use App\Models\RatingReview;
 
 class ProductController extends Controller
 {
@@ -20,9 +22,6 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-    }
 
     public function imgshow($id)
     {
@@ -38,14 +37,16 @@ class ProductController extends Controller
         // dd($image);
         $images = json_decode($product->image, true);
 
-        // dd($images);
-        // dd($test);
+        $reviews = RatingReview::where('product_id', $id)->get();
 
-        // foreach ($test as $images) {
-
-
+        // dd($reviews);
+        // $user = Auth::user()->id;
+        // dd($user);
+        // dd($id);
         //     // return view("images");
-        return view('images', ['images' => $images], ['product' => $product]);
+
+        // return view('details', ['images' => $images], ['product' => $product], ['reviews' => $reviews]);
+        return view('details', compact('images', 'product', 'reviews'));
     }
 
     // public function getDicountedPriceAttribute()
@@ -73,6 +74,7 @@ class ProductController extends Controller
         // $product->id = auth()->user()->id;
         $product->name = $request->input('name');
         $product->price = $request->input('price');
+        $product->discount = $request->input('discount');
         $product->description = $request->input('description');
         // $product->title = $request->input('title');
         // $product->otherinfo = $request->input('otherinfo');

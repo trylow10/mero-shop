@@ -34,7 +34,6 @@
                         required></input>
 
                 </div>
-
                 <div class="panel-body">
 
                     @if ($message = Session::get('success'))
@@ -75,6 +74,11 @@
                             <option value="{{ $category->id }}">{{ ucwords($category->name) }}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="text-center p-3 form-margin">
+                    <input class="border border-gray-400 p-2 w-full" type="number" name="discount"
+                        placeholder="Discount" required></input>
+
                 </div>
 
                 <div class="text-center mb-6">

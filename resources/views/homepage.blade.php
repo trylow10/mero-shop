@@ -75,7 +75,7 @@
 
                 <img src="{{ asset('Uploads/products/' . $product->image) }}" alt="product image"
                     class="product-img" />
-                <a href="{{ route('images', $product->id) }}" <h4 class=" product-title">{{ $product->name }}</h4>
+                <a href="{{ route('details', $product->id) }}" <h4 class=" product-title">{{ $product->name }}</h4>
                 </a>
 
                 {{-- <p class="card-desc">{{$product->title}}</p> --}}

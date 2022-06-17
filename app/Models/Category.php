@@ -15,4 +15,10 @@ class Category extends Model
 
         return $this->belongsToMany(Product::class, 'category_product');
     }
+    public function run()
+    {
+        Category::factory()
+            ->count(10)
+            ->create();
+    }
 }

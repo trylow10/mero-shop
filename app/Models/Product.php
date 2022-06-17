@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory;
     protected $guarded = [];
     protected $fillable = [
-        'image'
+        'image', 'discount'
     ];
 
     public function getDicountedPriceAttribute()
@@ -20,16 +20,16 @@ class Product extends Model
     }
 
 
-    // public function scopeFilter($query, array $filters)
-    // {
-    //     $query->when(
-    //         $filters['category'] ?? false,
-    //         fn ($query, $category) =>
-    //         $query
-    //             ->whereHas('category', fn ($query) =>
-    //             $query->where('name', $category))
-    //     );
-    // }
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when(
+            $filters['category'] ?? false,
+            fn ($query, $category) =>
+            $query
+                ->whereHas('category', fn ($query) =>
+                $query->where('name', $category))
+        );
+    }
 
 
     // public function scopeRelatedProducts($query, $count = 10, $inRandomOrder = true)
@@ -65,6 +65,10 @@ class Product extends Model
         return $this->belongsToMany(Purchase::class, 'purchase_products');
     }
 
+    public function ratings()
+    {
+        return $this->hasMany(RatingReview::class, 'rating_reviews');
+    }
 
     public function run()
     {
