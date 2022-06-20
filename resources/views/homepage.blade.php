@@ -1,5 +1,5 @@
 @extends('layouts.cart_layout')
-
+@include('layouts.review_layout')
 @section('content1')
     <section class="section-hero">
         <div class="hero">
@@ -67,37 +67,44 @@
     <h1 class="text-center p-3" style="font-size: 20px">PRODUCTS</h1>
     <div class="products">
         <!-- Product -->
+
         @foreach ($products as $product)
             <div class="product-card">
                 old price {{ $product->price }}<br>
                 discount percent {{ $product->discount }}%<br>
-                discouted price price {{ $product->getDicountedPriceAttribute() }}
+                {{-- discouted price price {{ $product->getDicountedPriceAttribute() }} --}}
 
-                <img src="{{ asset('Uploads/products/' . $product->image) }}" alt="product image"
-                    class="product-img" />
+                <img src="{{ asset('Uploads/products/' . $product->image) }}" alt="product image" class="product-img" />
                 <a href="{{ route('details', $product->id) }}" <h4 class=" product-title">{{ $product->name }}</h4>
                 </a>
 
                 {{-- <p class="card-desc">{{$product->title}}</p> --}}
-
+                <p class="mt-1">
+                    @for ($i = 1; $i <= $product->avgStar; $i++)
+                        <span><i class="fa fa-star text-warning"></i></span>
+                        {{-- {{ $review->star_rating }} --}}
+                    @endfor
+                    {{-- <span class="font ml-2">{{ $review->email }}</span> --}}
+                </p>
                 <p class="product-category">
 
                     @foreach ($product->category as $category)
                         {{ $category->name }}
+                    @endforeach
                 </p>
 
-                {{-- {{$product->name}} --}}
-                {{-- {{ $product['category']-> $category->name}} --}}
+
+                {{-- <button class="buy-now">Buy Now</button> --}}
+
+                <p class="product-price">Rs.{{ $product->getDicountedPriceAttribute() }}</p>
+
+                <p class="btn-holder">
+                    <a href="{{ route('add.to.cart', $product->id) }}" class="btn btn-warning btn-block text-center"
+                        role="button">Add to cart</a>
+                </p>
+            </div>
         @endforeach
-        <p class="product-price">${{ $product->price }}</p>
-        {{-- <button class="buy-now">Buy Now</button> --}}
-        <p class="btn-holder">
-            <a href="{{ route('add.to.cart', $product->id) }}" class="btn btn-warning btn-block text-center"
-                role="button">Add to cart</a>
-        </p>
-    </div>
-    @endforeach
-    <!-- product Ends -->
+        <!-- product Ends -->
     </div>
     <span class="text-center">{{ $products->links() }}</span>
 @endsection

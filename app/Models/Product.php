@@ -69,6 +69,7 @@ class Product extends Model
     {
         return $this->hasMany(RatingReview::class, 'rating_reviews');
     }
+    
 
     public function run()
     {

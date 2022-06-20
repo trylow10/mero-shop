@@ -12,11 +12,11 @@ Route::get('details/{id}', [ProductController::class, 'imgshow'])->name('details
 // Route::get('/post-create', [RatingReviewController::class, 'create'])->name('post.create');
 // Route::post('/post-store', [RatingReviewController::class, 'store'])->name('post.store');
 // Route::get('/post-list', [RatingReviewController::class, 'list'])->name('post.list');
-Route::get('view/{id}', [RatingReviewController::class, 'view'])->name('view');
+// Route::get('view/{id}', [RatingReviewController::class, 'view'])->name('view');
 
 #Manage Review
 Route::post('/review-store', [RatingReviewController::class, 'store'])->name('review.store');
-Route::get('/review', [RatingReviewController::class, 'index'])->name('review');
+// Route::get('/review', [RatingReviewController::class, 'index'])->name('review');
 
 
 

@@ -14,14 +14,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
     </script>
+    <style>
+        ul.no-bullets {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
-</head>
+
 
 <body>
-    {{-- @extends('layout') --}}
-
+    {{-- @section('scripts') --}}
+    {{-- @include('layouts.cart_layout') --}}
+    @include('homeheader')
     @extends('layouts.review_layout')
-    <div class="container-fluid">
+    <div class="container-fluid pt-5">
         <div class="card-header text-center">
             <h5>Products</h5>
         </div>
@@ -31,11 +39,20 @@
                     <img class="card-img-top">
                     <div class=" carousel-inner">
                         {{-- {{ dd($images) }} --}}
+                        {{-- @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif --}}
+
                         @foreach ($images as $key => $image)
                             <div class="carousel-item  {{ $key == 'image0' ? 'active' : '' }}">
                                 <img src="{{ asset('Uploads/products/' . $image) }}" class="img-fluid" alt="..."
                                     height="30%" />
-
                             </div>
                         @endforeach
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
@@ -55,18 +72,31 @@
             </div>
             <div class="col-md-6">
                 <div class="card-body text-center">
+
+                    <h5 class="card-title">
+
+                        <p class="mt-1">
+                            @for ($i = 1; $i <= $avgStar; $i++)
+                                <span><i class="fa fa-star text-warning"></i></span>
+                                {{-- {{ $review->star_rating }} --}}
+                            @endfor
+                            {{-- <span class="font ml-2">{{ $review->email }}</span> --}}
+                        </p>
+                    </h5>
+
+
                     <h5 class="card-title">{{ $product->name }}</h5>
 
-                    <div class="text-center">
 
-                        <ul class="">
-                            <li style="">old price {{ $product->price }}<br></li>
-                            <li class="">discount percent {{ $product->discount }}%<br></li>
-                            <li class=""> discouted price price
-                                {{ $product->getDicountedPriceAttribute() }}
-                            </li>
-                        </ul>
-                    </div>
+
+                    <ul class="no-bullets">
+                        <li c>old price {{ $product->price }}<br></li>
+                        <li>discount percent {{ $product->discount }}%<br></li>
+                        <li> discouted price price
+                            {{ $product->getDicountedPriceAttribute() }}
+                        </li>
+                    </ul>
+
 
                     <div class="row">
                         <div class="col-lg-12 col-sm-12 col-12 text-center cart">
@@ -154,19 +184,7 @@
     </div>
 
     </div>
-    {{-- <div class="card text-center">
-        <div class="card-header">
-            Reviews
-        </div>
-
-        <div class="card-body">
-
-            <h5 class="card-title">Username</h5>
-            <p class="card-text">Stars.</p>
-            <p class="card-text">Review.</p>
-            {{-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
-    </div>
-    </div> --}}
+    {{-- </div> --}}
 
     <!-- Display review section start -->
     <div class="row">
@@ -210,7 +228,7 @@
                             </div>
                         </div>
                     </div>
-
+                    {{-- @endsection --}}
 </body>
 
 </html>

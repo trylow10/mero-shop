@@ -18,7 +18,7 @@ class Category extends Model
     public function run()
     {
         Category::factory()
-            ->count(10)
+            ->count(20)
             ->create();
     }
 }

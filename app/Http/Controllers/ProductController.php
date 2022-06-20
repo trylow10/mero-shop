@@ -11,6 +11,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RatingReview;
+use App\Models\User;
 
 class ProductController extends Controller
 {
@@ -28,6 +29,8 @@ class ProductController extends Controller
         // $sql = Product::all()->where('id', 1);
         // dd($sql);
         $product = Product::find($id);
+        // $user = RatingReview::find($id);
+        // dd($user);
         // $products = Product::find();
         // dd($id);
 
@@ -37,16 +40,28 @@ class ProductController extends Controller
         // dd($image);
         $images = json_decode($product->image, true);
 
-        $reviews = RatingReview::where('product_id', $id)->get();
+        $reviews = RatingReview::where('product_id', $product->id)->get();
 
-        // dd($reviews);
+        $avgStar = RatingReview::avg('star_rating');
+        // dd($avgStar);
+
+        // $users = RatingReview::where('user_id', $user->id)->get();
+        // dd($users);
+
+
+
+        // foreach ($reviews as $review) {
+
+        //     $review->avg('star_rating');
+        // }
+
         // $user = Auth::user()->id;
-        // dd($user);
+        // dd($reviews);
         // dd($id);
         //     // return view("images");
 
         // return view('details', ['images' => $images], ['product' => $product], ['reviews' => $reviews]);
-        return view('details', compact('images', 'product', 'reviews'));
+        return view('details', compact('images', 'product', 'reviews', 'avgStar'));
     }
 
     // public function getDicountedPriceAttribute()
@@ -144,6 +159,7 @@ class ProductController extends Controller
         $products = Product::latest()->paginate(15);
 
         // dd($products->category);
+        // dd($products);
 
         return view('products', ['products' => $products]);
     }
@@ -223,8 +239,10 @@ class ProductController extends Controller
             return view('welcome', compact('products', 'categories'));
         } else {
             $products = Product::filter(request(['category']))->paginate(15);
+            // dd($products);
 
             foreach ($products as $product) { {
+                    // dd($product);
 
                     $categories = Category::get();
 
@@ -244,12 +262,25 @@ class ProductController extends Controller
 
                     // $category = [];
 
-                    // dd($product);
                     // array_push($category,'category');
                     // }
+
+                    $product['avgStar'] = RatingReview::where('product_id', $product->id)->avg('star_rating');
                 }
                 // dd($products);
-                // dd($product);
+
+                // $product = Product::find($id);
+                // // Get all reviews that are not spam for the product and paginate them
+                // $reviews = $product->reviews()->with('user')->approved()->notSpam()->orderBy('created_at', 'desc')->paginate(100);
+
+
+                // $reviews = RatingReview::where('product_id', $product->id)->get();
+
+
+                // dd($avgStar);
+                // $users = RatingReview::where('user_id', $user->id)->get();
+                // $reviews = RatingReview::where('product_id',)->get();
+                // dd($users);
 
 
                 // dd($category);
