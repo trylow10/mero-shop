@@ -15,13 +15,7 @@ class User extends Authenticatable
     use HasFactory;
     // use HasProfilePhoto;
     use Notifiable;
-    // use TwoFactorAuthenticatable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'email',
@@ -29,11 +23,12 @@ class User extends Authenticatable
         'google_id'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    public function cart()
+    {
+        session()->put('cart');
+        return $this->hasOne(Cart::class);
+    }
+
     protected $hidden = [
         'password',
         'remember_token',

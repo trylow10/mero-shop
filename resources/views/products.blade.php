@@ -4,7 +4,7 @@
             {{ __('Products') }}
         </h2>
     </x-slot>
-
+    {{ session('sucess') }}
     <div class="py-12 bg-indigo-900">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
             <a href="addProduct" class="my-6 p-6 add-product-btn">Add Product</a>
@@ -17,7 +17,7 @@
                             <x-table-column>Name</x-table-column>
                             <x-table-column>Description</x-table-column>
                             <x-table-column>Price</x-table-column>
-                            {{-- <x-table-column>Other info</x-table-column> --}}
+                            <x-table-column>Discount %</x-table-column>
                             <x-table-column>Image</x-table-column>
                             <x-table-column>Category</x-table-column>
                             <td colspan="2">Action</td>
@@ -29,7 +29,7 @@
                                 <x-table-column>{{ $product->name }}</x-table-column>
                                 <x-table-column>{{ $product->description }}</x-table-column>
                                 <x-table-column>{{ $product->price }}</x-table-column>
-                                {{-- <x-table-column>{{$product->otherinfo}}</x-table-column> --}}
+                                <x-table-column>{{ $product->discount }}</x-table-column>
                                 <x-table-column> <img src="{{ asset('Uploads/products/' . $product->Image) }}"
                                         width="70px" height="70px" alt="Product Image"></x-table-column>
                                 {{-- <x-table-column>{{$product->productprice}}</x-table-column> --}}

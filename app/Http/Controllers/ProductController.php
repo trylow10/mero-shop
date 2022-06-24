@@ -6,6 +6,7 @@ use App\Http\Controllers\DB;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\CategoryProduct;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\File;
@@ -173,6 +174,10 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
+        // $categories = Category::all();
+        // dd($categories);
+
+
         return view('editProduct', compact('product'));
     }
 
@@ -188,23 +193,43 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->name = $request->input('name');
         $product->price = $request->input('price');
+        $product->discount = $request->input('discount');
         $product->description = $request->input('description');
-        if ($request->hasfile('image')) {
+        $images = [];
 
-            $destination = 'Uploads/products/' . $product->Image;
-            if (File::exists($destination)) {
-                File::delete($destination);
+        if ($image = $request->file('images')) {
+            foreach ($request->images as $key => $image) {
+                // dd($image);
+
+                // dd($image->getClientOriginalExtension());
+                $imageType = $image->getClientOriginalExtension();
+                $imageName = time() . rand(1, 99) . '.' . $imageType;
+                $image->move('Uploads/products/', $imageName);
+
+                $images['image' . $key] = $imageName;
             }
-            $file = $request->file('image');
-            $filetype = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $filetype;
-            $file->move('Uploads/products/', $filename);
-            $product->image = $filename;
+            // $data = $request->only('images');
+            $product->image = json_encode($images);
+            // Product::insert($images);
+            // dd($images);
         }
-        // $product->price = $request->input('price');
+
+        // $product->save();
+
+        $category = Category::find($request->category_id);
+        // dd($category);
         // $product->category_id = $request->input('category_id');
+        // dd($category);
+
+        $product->category()->sync($category);
+
         $product->update();
-        return redirect('products')->with('success', 'Product has been Edited.');
+        // // // // dd($category);
+
+        // $product->category()->attach($category);
+        // $product->category_id = $request->input('category_id');
+
+        return redirect()->route('products')->with('success', 'Product has been Edited.');
     }
 
     /**

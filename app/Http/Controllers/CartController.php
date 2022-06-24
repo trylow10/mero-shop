@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Purchase;
@@ -40,42 +41,54 @@ class CartController extends Controller
      */
     public function addToCart($id)
     {
-        // $category = Category::find($id);
-        // if (Auth::check()) {
-        //     return redirect()->route('login');
-        // } else {
 
-        $product = Product::find($id);
-        // dd($product);
+        if (Auth::check()) {
+
+            $product = Product::find($id);
+            $cart = session()->get('cart', []);
+
+            if (isset($cart[$id])) {
+
+                $cart[$id]['quantity']++;
+            } else {
+                $cart[$id] = [
+                    'product_id' => $product->id,
+                    'user_id' => auth()->user()->id,
+                    "name" => $product->name,
+                    "quantity" => 1,
+                    "price" => $product->price,
+                    "image" => $product->image,
+                    "description" => $product->description
+                ];
+            }
+            // }
+            // dd($cart[$id]);
+            // $purchase = crea
+
+            // array_push($cart,[]);
 
 
 
-        $cart = session()->get('cart', []);
-        // dd($cart);
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+
+            session()->put('cart', $cart);
+            // dd($cart);
+
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
         } else {
-            $cart[$id] = [
-                'product_id' => $product->id,
-                'user_id' => auth()->user()->id,
-                "name" => $product->name,
-                "quantity" => 1,
-                "price" => $product->price,
-                "image" => $product->image,
-                "description" => $product->description
-            ];
+
+            // $cart = Cart::find($id);
+
+            // $user = User::find($id);
+
+            // // $cart->user()->associate($user);
+            // dd($);
+            // $cart->save();
+
+
+
+            return redirect()->route('login')->with('sucess', 'please login first', session()->keep());
         }
-        // }
-        // dd($cart[$id]);
-        // $purchase = crea
-
-        // array_push($cart,[]);
-
-
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
-
     /**
      * Write code on Method
      *

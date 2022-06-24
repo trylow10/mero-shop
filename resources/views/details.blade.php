@@ -20,6 +20,13 @@
             margin: 0;
             padding: 0;
         }
+
+        /* .container {
+            overflow: auto;
+            display: flex;
+            scroll-snap-type: x mandatory;
+
+        } */
     </style>
 </head>
 

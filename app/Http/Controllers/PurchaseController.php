@@ -82,8 +82,8 @@ class PurchaseController extends Controller
         $products = Product::latest()->paginate(15);
 
         // dd($products->category);
-        // session()->forget('cart');
-        // session()->flash("Cart has been cleared");
+        session()->forget('cart');
+        session()->flash("Cart has been cleared");
 
         // $products = Product::latest()->paginate(15);
 
@@ -107,14 +107,17 @@ class PurchaseController extends Controller
     {
         // $products = Product::filter(request(['category']))->paginate(15);
         $products = Product::latest()->paginate(15);
-        // dd($products[0]);
-        $users = Purchase::latest()->paginate(15);
-        $purchases = Purchase::all();
-        // foreach ($products as $product) { {
+        // // dd($products[0]);
+        // $users = Purchase::latest()->paginate(15);
+        // $purchases = Purchase::all();
+        // $purchases = PurchaseProduct::latest()->paginate(15);
+        $purchases = Purchase::get();
+        // dd($products);
 
         //     }
         // }
-        return view('purchase', ['purchases' => $purchases], ['products' => $products], ['users' => $users]);
+        // return view('purchase', ['purchases' => $purchases], ['products' => $products], ['purchaseproduct' => $purchase_product]);
+        return view('purchase', ['purchases' => $purchases], ['products' => $products]);
     }
 }
     // return view('homepage');

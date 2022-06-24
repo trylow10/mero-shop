@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory;
     protected $guarded = [];
     protected $fillable = [
-        'image', 'discount'
+        'image', 'discount', 'price'
     ];
 
     public function getDicountedPriceAttribute()
@@ -69,7 +69,7 @@ class Product extends Model
     {
         return $this->hasMany(RatingReview::class, 'rating_reviews');
     }
-    
+
 
     public function run()
     {

@@ -13,6 +13,7 @@ class DashboardController extends Controller
     {
         $productCount = Product::all()->count();
         $userCount = User::all()->count();
+        // $users = User::all();
         $purchaseCount = PurchaseProduct::all()->count();
 
 
@@ -20,7 +21,7 @@ class DashboardController extends Controller
         return view('dashboard', compact('productCount', 'userCount', 'purchaseCount'));
     }
 
-    // public function test()
+    // public function ()
     // {
 
     //     return view("layouts");

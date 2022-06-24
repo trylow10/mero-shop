@@ -10,8 +10,8 @@
             <form method="POST" action="product" enctype="multipart/form-data">
                 @csrf
                 <div class="text-center p-3 form-margin">
-                    <input class="border border-gray-400 p-2 w-full" type="text" name="name" placeholder="Product Name"
-                        required></input>
+                    <input class="border border-gray-400 p-2 w-full" type="text" name="name"
+                        placeholder="Product Name" required></input>
                 </div>
 
 
@@ -30,8 +30,8 @@
 
 
                 <div class="text-center p-3 form-margin">
-                    <input class="border border-gray-400 p-2 w-full" type="text" name="price" placeholder="Product Price"
-                        required></input>
+                    <input class="border border-gray-400 p-2 w-full" type="text" name="price"
+                        placeholder="Product Price" required></input>
 
                 </div>
                 <div class="panel-body">
@@ -64,20 +64,22 @@
                 </div>
 
                 <div class="text-center p-3 form-margin">
-                    <select name="category_id"
+                    <select name="category_id[]" multiple
                         class="p-6 w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                        <option value="Select a Category" disabled>Select a Category</option>
+                        <option value="Select a Category">Select a Category</option>
                         @php
                             $categories = App\Models\Category::all();
                         @endphp
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ ucwords($category->name) }}</option>
                         @endforeach
+
+
                     </select>
                 </div>
                 <div class="text-center p-3 form-margin">
                     <input class="border border-gray-400 p-2 w-full" type="number" name="discount"
-                        placeholder="Discount" required></input>
+                        placeholder="Discount" />
 
                 </div>
 

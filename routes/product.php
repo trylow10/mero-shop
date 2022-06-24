@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RatingReviewController;
+use App\Http\Controllers\StockController;
 
 Route::get('products', [ProductController::class, 'show'])->middleware(['admin', 'auth'])->name('products');
 
@@ -18,7 +19,7 @@ Route::get('details/{id}', [ProductController::class, 'imgshow'])->name('details
 Route::post('/review-store', [RatingReviewController::class, 'store'])->name('review.store');
 // Route::get('/review', [RatingReviewController::class, 'index'])->name('review');
 
-
+Route::get('/stock', [StockController::class, 'create'])->name('stock');
 
 
 
@@ -41,12 +42,13 @@ Route::get('product', [ProductController::class, 'create'])->middleware(['auth',
 Route::post('product', [ProductController::class, 'store'])->middleware(['auth', 'admin'])->name('store');
 
 // show products for admin for crud
+Route::get('stock', [StockController::class, 'create'])->name('stock');
 
 // edit product view route
 Route::get('product/edit/{id}', [ProductController::class, 'edit'])->middleware(['auth', 'admin'])->name('productedit');
 
 // edit product POST or submit data route
-Route::post('editproduct/{id}', [ProductController::class, 'update'])->middleware(['auth', 'admin'])->name('productedit');
+Route::put('editproduct/{id}', [ProductController::class, 'update'])->middleware(['auth', 'admin'])->name('product.update');
 
 // del product
 Route::delete('/products/{products}', [ProductController::class, 'destroy'])->middleware(['auth', 'admin'])->name('productdelete');
