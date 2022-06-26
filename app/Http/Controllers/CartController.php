@@ -80,7 +80,7 @@ class CartController extends Controller
 
             // $user = User::find($id);
 
-            // // $cart->user()->associate($user);
+            // $cart->user()->associate($user);
             // dd($);
             // $cart->save();
 

@@ -5,7 +5,7 @@
 
 @section('content1')
     {{-- @section('nav') --}}
-   
+
     <table id="cart" class="table table-hover table-condensed">
         <thead>
             <tr>
@@ -47,13 +47,14 @@
             {{-- <tr>
             <td colspan="5" class="text-right"><h3><strong>Total ${{ $total }}</strong></h3></td>
         </tr> --}}
-            {{-- <tr>
-            <td colspan="5" class="text-right">
-                <a href="{{ route('checkout')}}"><button class="btn btn-success">Checkout</button></a>
-            </td>
-        </tr> --}}
+            <tr>
+                <td colspan="5" class="text-left">
+                    <a href="{{ route('homepage') }}"><button class="btn btn-warning"> Continue
+                            Shopping</a></button></a>
+                </td>
+            </tr>
+
         </tfoot>
-        <a href="{{ route('homepage') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
     </table>
 @endsection
 
@@ -109,7 +110,7 @@
             </div>
             <form action="{{ route('checkout.place.order') }}" method="POST" role="form">
                 @csrf
-                <div class="row">
+                <div class="row mt-5">
                     <div class="col-md-8">
                         <div class="card">
                             <header class="card-header">

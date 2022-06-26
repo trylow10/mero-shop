@@ -6,7 +6,19 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\StockController;
+use App\Http\Controllers\CategoryController;
+
+
+
+Route::get('/category/index', [CategoryController::class, 'index'])->middleware(['auth', 'admin'])->name('category.index');
+
+
+Route::get('/category', [CategoryController::class, 'create'])->middleware(['auth', 'admin'])->name('category.create');
+Route::post('/category', [CategoryController::class, 'store'])->middleware(['auth', 'admin'])->name('category.store');
+Route::get('/category/show{id}', [CategoryController::class, 'show'])->middleware(['auth', 'admin'])->name('category.show');
+Route::get('category/edit/{id}', [CategoryController::class, 'edit'])->middleware(['auth', 'admin'])->name('category.edit');
+Route::put('category/update/{id}', [CategoryController::class, 'update'])->middleware(['auth', 'admin'])->name('category.update');
+Route::delete('category/{category}', [CategoryController::class, 'destroy'])->middleware(['auth', 'admin'])->name('category.delete');
 
 
 
@@ -16,54 +28,6 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 
 Route::get('/', [ProductController::class, 'showProduct'])->name('homepage');
 
-
-//Route::delete('stocks/destroy', 'StocksController@massDestroy')->name('stocks.massDestroy');
-
-
-
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'admin'])->name('dashboard');
-
-//route for products view
-// Route::get('/products', function () {
-//     return view('products');
-// })->middleware(['auth', 'admin'])->name('products');
-
-// route for add product view
-// Route::get('/addProduct', function () {
-//     return view('addProduct');
-// })->middleware(['auth', 'admin'])->name('addProducts');
-
-// create a new product
-// Route::get('product', [ProductController::class, 'create'])->middleware(['auth', 'admin'])->name('create');
-// Route::post('product', [ProductController::class, 'store'])->middleware(['auth', 'admin'])->name('store');
-
-// // show products for admin for crud
-// Route::get('/products', [ProductController::class, 'show'])->middleware(['auth', 'admin'])->name('products');
-
-// // edit product view route
-// Route::get('product/edit/{id}', [ProductController::class, 'edit'])->middleware(['auth', 'admin'])->name('productedit');
-
-// // edit product POST or submit data route
-// Route::post('editproduct/{id}', [ProductController::class, 'update'])->middleware(['auth', 'admin'])->name('productedit');
-
-// // del product
-// Route::delete('/products/{products}', [ProductController::class, 'destroy'])->middleware(['auth', 'admin'])->name('productdelete');
-
-// // show all products to homepage for user
-// Route::get('/', [ProductController::class, 'showProduct'])->name('homepage');
-
-
-// //buy now and add to cart for user
-
-// // Route::get('/', [ProductController::class, 'buynow'])->name('purchase');
-
-// // mailchimp
-// Route::post('newsletter', [ProductController::class, 'newsLetter']);
-
-// dashboard Controller showing number of products
 
 Route::get('/dashboard', [DashboardController::class, 'count'])->middleware(['admin', 'auth'])->name('dashboard');
 

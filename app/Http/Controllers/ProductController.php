@@ -87,20 +87,13 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $product = new Product();
-        // $product->id = auth()->user()->id;
         $product->name = $request->input('name');
         $product->price = $request->input('price');
         $product->discount = $request->input('discount');
         $product->description = $request->input('description');
-        // $product->title = $request->input('title');
-        // $product->otherinfo = $request->input('otherinfo');
-        // if ($request->hasfile('image')) {
-        //     $file = $request->file('image');
-        //     $filetype = $file->getClientOriginalExtension();
-        //     $filename = time() . '.' . $filetype;
-        //     $file->move('Uploads/products/', $filename);
-        //     $product->image = $filename;
-        // }
+        $product->stocks = $request->input('stocks');
+
+
 
         $request->validate([
             'images' => 'required',
@@ -174,52 +167,37 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        // $categories = Category::all();
-        // dd($categories);
-
 
         return view('editProduct', compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
         $product->name = $request->input('name');
         $product->price = $request->input('price');
         $product->discount = $request->input('discount');
+        $product->stocks = $request->input('stocks');
         $product->description = $request->input('description');
         $images = [];
 
         if ($image = $request->file('images')) {
             foreach ($request->images as $key => $image) {
-                // dd($image);
 
-                // dd($image->getClientOriginalExtension());
                 $imageType = $image->getClientOriginalExtension();
                 $imageName = time() . rand(1, 99) . '.' . $imageType;
                 $image->move('Uploads/products/', $imageName);
 
                 $images['image' . $key] = $imageName;
             }
-            // $data = $request->only('images');
+
             $product->image = json_encode($images);
-            // Product::insert($images);
-            // dd($images);
         }
 
         // $product->save();
 
         $category = Category::find($request->category_id);
-        // dd($category);
-        // $product->category_id = $request->input('category_id');
-        // dd($category);
 
         $product->category()->sync($category);
 
@@ -232,12 +210,7 @@ class ProductController extends Controller
         return redirect()->route('products')->with('success', 'Product has been Edited.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $product = Product::find($id);
@@ -271,49 +244,9 @@ class ProductController extends Controller
 
                     $categories = Category::get();
 
-                    // foreach($product->category as $category){
-
-                    // $product['category']= $category->name;
-
-                    //  dd($product);
-                    // $product =
-
-                    // $category=[];
-
-                    // array_push($category,$product);
-
-
-                    //  dd($product);
-
-                    // $category = [];
-
-                    // array_push($category,'category');
-                    // }
 
                     $product['avgStar'] = RatingReview::where('product_id', $product->id)->avg('star_rating');
                 }
-                // dd($products);
-
-                // $product = Product::find($id);
-                // // Get all reviews that are not spam for the product and paginate them
-                // $reviews = $product->reviews()->with('user')->approved()->notSpam()->orderBy('created_at', 'desc')->paginate(100);
-
-
-                // $reviews = RatingReview::where('product_id', $product->id)->get();
-
-
-                // dd($avgStar);
-                // $users = RatingReview::where('user_id', $user->id)->get();
-                // $reviews = RatingReview::where('product_id',)->get();
-                // dd($users);
-
-
-                // dd($category);
-
-                //     $product = $category->name;
-                //  dd($categories);
-
-
             }
             return view('welcome', compact('products'));
         }
@@ -341,3 +274,8 @@ class ProductController extends Controller
         return redirect('/')->with('success', 'You are now signed up for our newsletter');
     }
 }
+// if ($product->stock > 0) {
+//     dd('available');
+// } else {
+//     dd('out of stock');
+// }

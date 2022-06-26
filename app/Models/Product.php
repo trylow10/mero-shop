@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory;
     protected $guarded = [];
     protected $fillable = [
-        'image', 'discount', 'price'
+        'image', 'discount', 'price', 'stocks'
     ];
 
     public function getDicountedPriceAttribute()
@@ -32,24 +32,6 @@ class Product extends Model
     }
 
 
-    // public function scopeRelatedProducts($query, $count = 10, $inRandomOrder = true)
-    // {
-    //     dd($this->category_id);
-
-    //     $sql = Product::all()->where('id', 1);
-    //     dd($sql);
-
-    //     $query = $query->where('category_id', $this->category_id);
-
-    //     // dd($query);
-    //     // ->where('slug' '!=' $this->slug);
-
-    //     if ($inRandomOrder) {
-    //         $query->inRandomOrder();
-    //     }
-
-    //     return $query->take($count);
-    // }
 
 
 

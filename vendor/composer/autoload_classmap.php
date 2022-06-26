@@ -44,7 +44,7 @@ return array(
     'App\\Models\\Purchase' => $baseDir . '/app/Models/Purchase.php',
     'App\\Models\\PurchaseProduct' => $baseDir . '/app/Models/PurchaseProduct.php',
     'App\\Models\\RatingReview' => $baseDir . '/app/Models/RatingReview.php',
-    'App\\Models\\Stock' => $baseDir . '/app/Models/Stock.php',
+    'App\\Models\\Stocks' => $baseDir . '/app/Models/Stocks.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

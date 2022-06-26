@@ -92,20 +92,29 @@
             {{-- <button class="buy-now">Buy Now</button> --}}
 
             <p class="product-price">Rs.{{ $product->getDicountedPriceAttribute() }}</p>
+            {{-- <p class="product-price">{{ $product->stocks }}</p> --}}
+            {{ $product->stocks > 0 ? 'stocks ma xa' : ' stock ma xaina' }}
+            <p class="product-price"></p>
+            {{-- {{ $product->stocks > 0 ? 'stocks ma xa' : 'xaina' }} --}}
 
-            <p class="btn-holder">
+            @if ($product->stocks > 0)
+                <p class="btn-holder">
 
-                <a href="{{ route('add.to.cart', $product->id) }}" class="btn btn-warning btn-block text-center"
-                    role="button">Add to cart</a>
-            </p>
+                    <a href="{{ route('add.to.cart', $product->id) }}" class="btn btn-warning btn-block text-center "
+                        role="button">Add to cart</a>
+                </p>
+            @else
+                <p class="btn-holder">
+
+                    <a href="#" class="btn btn-warning btn-block text-center" style="cursor: not-allowed"
+                        role="button">Add to
+                        cart</a>
+                </p>
+            @endif
         </div>
     @endforeach
     <!-- product Ends -->
 </div>
-<!-- /resources/views/post/create.blade.php -->
-<a href="{{ route('stock') }}">
-    <h1>test</h1>
-</a>
 
 
 <!-- Create Post Form -->

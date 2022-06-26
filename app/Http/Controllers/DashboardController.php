@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\PurchaseProduct;
 use App\Models\User;
@@ -15,10 +16,11 @@ class DashboardController extends Controller
         $userCount = User::all()->count();
         // $users = User::all();
         $purchaseCount = PurchaseProduct::all()->count();
+        $categoryCount = Category::all()->count();
 
 
         // dd($productcategory);
-        return view('dashboard', compact('productCount', 'userCount', 'purchaseCount'));
+        return view('dashboard', compact('productCount', 'userCount', 'purchaseCount', 'categoryCount'));
     }
 
     // public function ()

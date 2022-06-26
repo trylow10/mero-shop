@@ -34,6 +34,11 @@
                         placeholder="Product Price" required></input>
 
                 </div>
+                <div class="text-center p-3 form-margin">
+                    <input class="border border-gray-400 p-2 w-full" type="number" name="stocks"
+                        placeholder="Availabe in Inventory" />
+
+                </div>
                 <div class="panel-body">
 
                     @if ($message = Session::get('success'))

@@ -587,7 +587,7 @@ class ComposerStaticInite0a438647acc7725717f199e5b785aa3
         'App\\Models\\Purchase' => __DIR__ . '/../..' . '/app/Models/Purchase.php',
         'App\\Models\\PurchaseProduct' => __DIR__ . '/../..' . '/app/Models/PurchaseProduct.php',
         'App\\Models\\RatingReview' => __DIR__ . '/../..' . '/app/Models/RatingReview.php',
-        'App\\Models\\Stock' => __DIR__ . '/../..' . '/app/Models/Stock.php',
+        'App\\Models\\Stocks' => __DIR__ . '/../..' . '/app/Models/Stocks.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

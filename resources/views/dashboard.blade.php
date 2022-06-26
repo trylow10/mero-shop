@@ -41,7 +41,19 @@
                         </div>
                     </div>
                 </div>
-                <!--/Metric Card-->
+
+            </div>
+            <div class="w-half md:w-1/2 xl:w-1/3 p-6 d-count">
+                <!--Metric Card-->
+                <div class="border-b-4 rounded-lg shadow-xl p-5">
+                    <div class="flex flex-row items-center">
+                        <div class="flex-1 text-right md:text-center">
+                            <h2 class="font-bold uppercase text-gray-600">Total Category</h2>
+                            <p class="font-bold text-3xl">{{ $categoryCount }}</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <!--  -->

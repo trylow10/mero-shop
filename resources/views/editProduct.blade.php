@@ -17,14 +17,14 @@
 
 
 
-                <!-- title or slug-->
-
-                <!-- pages/Duration/Gameing Info -->
-                {{-- {{ dd($category_id) }} --}}
-
                 <div class="text-center p-3 form-margin">
                     <input class="border border-gray-400 p-2 w-full" type="text" name="description"
                         placeholder="description" value="{{ $product->description }}" required></input>
+                </div>
+                <div class="text-center p-3 form-margin">
+                    <input class="border border-gray-400 p-2 w-full" type="number" name="stocks"
+                        value="{{ $product->stocks }}}" placeholder="Availabe in Inventory" required />
+
                 </div>
                 <!-- Image -->
                 <div class="text-center p-3 form-margin">
