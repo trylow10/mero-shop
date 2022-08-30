@@ -16,7 +16,7 @@
 
 
     <br />
-    <div class="container">
+    <div class="">
 
         @if (session('success'))
             <div class="alert alert-success">

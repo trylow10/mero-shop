@@ -14,4 +14,10 @@ class PurchaseProduct extends Model
         'product_id',
         'purchase_id',
     ];
+
+    // public function getRemaingStocks()
+    // {
+
+    //     return $this->stocks - $this->quantity;
+    // }
 }

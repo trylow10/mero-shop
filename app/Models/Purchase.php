@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Purchase extends Model
 {
@@ -23,14 +24,20 @@ class Purchase extends Model
     ];
     public function product()
     {
-        // return $this->hasMany(Product::class,);
 
         return $this->belongsToMany(Product::class, 'purchase_products');
     }
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
-
-        // return $this->hasMany(Auth::class, 'purchase_products');
     }
+
+
+    // public function getRemaingStocks()
+    // {
+
+    //     return DB::where('id', 5)->get('stocks') - $this->quantity;
+
+    // }
 }

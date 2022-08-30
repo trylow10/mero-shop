@@ -58,7 +58,7 @@ class CategoryController extends Controller
         // $request->validate([
         //     'name' => 'required|min:3',
         //     'slug ' => 'required',
-        // ]);
+        // ]); 
         // dd($request);
         $category = Category::find($id);
         $category->name = $request->name;

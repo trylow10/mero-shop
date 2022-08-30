@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Http\Controllers\ProductController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -18,22 +19,6 @@ class Product extends Model
     {
         return $this->price * (1 - $this->discount / 100);
     }
-
-
-    public function scopeFilter($query, array $filters)
-    {
-        $query->when(
-            $filters['category'] ?? false,
-            fn ($query, $category) =>
-            $query
-                ->whereHas('category', fn ($query) =>
-                $query->where('name', $category))
-        );
-    }
-
-
-
-
 
     public function category()
     {

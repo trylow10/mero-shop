@@ -18,7 +18,6 @@
                             <x-table-column>Product Name</x-table-column>
                             <x-table-column>Price</x-table-column>
                             <x-table-column>Quantity</x-table-column>
-                            {{-- <x-table-column> Image</x-table-column> --}}
                             <x-table-column>Category</x-table-column>
                         </tr>
                     </thead>
@@ -32,9 +31,7 @@
                             {{-- {{ dd($purchase->product) }} --}}
                             <x-table-column>{{ $product->name }}</x-table-column>
                             <x-table-column>{{ $product->price }}</x-table-column>
-                            <x-table-column>{{ $product->quantity }}</x-table-column>
-                            {{-- <x-table-column>{{ $product->image }}
-                                    </x-table-column> --}}
+                            <x-table-column>{{ $product->stocks }}</x-table-column>
                         @endforeach
                     </tbody>
                 </table>

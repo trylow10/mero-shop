@@ -74,7 +74,8 @@
                     quantity: ele.parents("tr").find(".quantity").val()
                 },
                 success: function(response) {
-                    window.location.reload();
+                    alert('here');
+                    // window.location.reload();
                 }
             });
         });

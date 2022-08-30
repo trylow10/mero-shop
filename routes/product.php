@@ -7,14 +7,9 @@ use App\Http\Controllers\RatingReviewController;
 use App\Http\Controllers\StocksController;
 
 
-
-
-
 Route::get('products', [ProductController::class, 'show'])->middleware(['admin', 'auth'])->name('products');
 
 Route::get('details/{id}', [ProductController::class, 'imgshow'])->name('details');
-
-
 
 #Manage Review
 Route::post('/review-store', [RatingReviewController::class, 'store'])->name('review.store');
@@ -27,6 +22,7 @@ Route::get('/addProduct', function () {
 // create a new product
 
 Route::get('product', [ProductController::class, 'create'])->middleware(['auth', 'admin'])->name('create');
+Route::get('product', [ProductController::class, 'scopeFilter'])->middleware(['auth', 'admin'])->name('related');
 Route::post('product', [ProductController::class, 'store'])->middleware(['auth', 'admin'])->name('store');
 
 // show products for admin for crud

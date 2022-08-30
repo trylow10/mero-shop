@@ -69,17 +69,17 @@
             discount percent {{ $product->discount }}%<br>
             {{-- discouted price price {{ $product->getDicountedPriceAttribute() }} --}}
 
-            <img src="{{ asset('Uploads/products/' . $product->image) }}" alt="product image" class="product-img" />
-            <a href="{{ route('details', $product->id) }}" <h4 class=" product-title">{{ $product->name }}</h4>
+            <img src="{{ asset('Uploads/products/' . $product->image[0]) }}" class="product-img" alt="product img"
+                height="30%" />
+            <a href="{{ route('details', $product->id) }}" <h4 class="product-title">{{ $product->name }}</h4>
             </a>
 
             {{-- <p class="card-desc">{{$product->title}}</p> --}}
             <p class="mt-1">
                 @for ($i = 1; $i <= $product->avgStar; $i++)
                     <span><i class="fa fa-star text-warning"></i></span>
-                    {{-- {{ $review->star_rating }} --}}
                 @endfor
-                {{-- <span class="font ml-2">{{ $review->email }}</span> --}}
+
             </p>
             <p class="product-category">
 
@@ -87,15 +87,11 @@
                     {{ $category->name }}<br>
                 @endforeach
             </p>
-
-
-            {{-- <button class="buy-now">Buy Now</button> --}}
-
+            {{-- {{ dd(getRemaingStocks()) }} --}}
             <p class="product-price">Rs.{{ $product->getDicountedPriceAttribute() }}</p>
-            {{-- <p class="product-price">{{ $product->stocks }}</p> --}}
-            {{ $product->stocks > 0 ? 'stocks ma xa' : ' stock ma xaina' }}
+            {{ $product->stocks }}
+            {{ $product->stocks > 0 ? 'in stocks' : 'out of stock' }}
             <p class="product-price"></p>
-            {{-- {{ $product->stocks > 0 ? 'stocks ma xa' : 'xaina' }} --}}
 
             @if ($product->stocks > 0)
                 <p class="btn-holder">
@@ -118,6 +114,6 @@
 
 
 <!-- Create Post Form -->
-<span class="text-center">{{ $products->links() }}</span>
+{{-- <span class="text-center">{{ $products->links() }}</span> --}}
 {{-- @endsection
 @endsection --}}

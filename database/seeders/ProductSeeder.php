@@ -23,14 +23,14 @@ class ProductSeeder extends Seeder
             [
                 'name' => 'Samsung Galaxy',
                 'description' => 'Samsung Brand',
-                'image' => 'https://dummyimage.com/200x300/000/fff&text=Samsung',
+                'image' => '{"image0":"165640129296.jpg","image1":"165640129234.png"}',
                 'price' => 100,
                 'discount' => 10
             ],
             [
                 'name' => 'Apple iPhone 12',
                 'description' => 'Apple Brand',
-                'image' => 'https://dummyimage.com/200x300/000/fff&text=Iphone',
+                'image' => '{"image0":"165640129296.jpg","image1":"165640129234.png"}',
                 'price' => 500,
                 'discount' => 20
             ],
