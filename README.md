@@ -5,27 +5,32 @@ This documentation provides an in-depth overview of the key components and funct
 ## Views
 
 ### Homepage Layout
+
 ![Homepage Layout](images/1.png)
 
-### Admin Dashboard
-![Admin Dashboard](images/2.png)
+### View Page
 
-### Newsletter View
-![Newsletter View](images/3.png)
+![View Page](images/2.png)
+
+### Admin Dashboard
+
+![Admin Dashboard](images/6.png)
 
 ### Admin View
+
 ![Admin View](images/4.png)
 
 ### Edit Product View
+
 ![Edit Product View](images/5.png)
 
 ## Routes
 
 The application includes various routes to navigate through different sections, including:
 
-- Showing Products in Homepage
-- Product Controller Routes (Create, Show, Edit, Delete)
-- Dashboard Controller Routes
+-   Showing Products in Homepage
+-   Product Controller Routes (Create, Show, Edit, Delete)
+-   Dashboard Controller Routes
 
 ## Laravel Breeze With Admin Middleware
 
@@ -34,20 +39,25 @@ By default, everyone is logged in as an admin in Laravel Breeze. A custom middle
 ## Models
 
 ### User Model
+
 Handles user data and authentication.
 
 ### Category Model
+
 Manages product categories with a relation to the Product model.
 
 ### Product Model
+
 Represents product information with category filtering.
 
 ## Controller
 
 ### ProductController
+
 Manages CRUD operations for products, including create, store, show, edit, update, and delete methods.
 
 ### DashboardController
+
 Handles actions related to the admin dashboard, including counting the total number of products and users in the database.
 
 ## Pagination
